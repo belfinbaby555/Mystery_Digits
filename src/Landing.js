@@ -3,6 +3,8 @@ import logo from "./images/Tantra White.png"
 import Leader from "./component/Leader";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import iedc from "./images/iedc.png"
+import iic from "./images/iic.png"
 
 
 function Landing() {
@@ -56,10 +58,14 @@ const mut=()=>{
   return (
     <div className="w-screen overflow-hidden relative h-svh bg-cover bg-no-repeat box-border px-5 py-2 flex flex-col" style={{backgroundImage:`url(${bg})`}}>
     <div className={"absolute w-screen h-svh top-0 flex left-0 duration-[2s] bg-gray-200" + (fade? " opacity-0 z-0":" opacity-100 z-20")}>
-      <div className="w-fit text-center h-fit m-auto" style={{animation:"revele 3s"}}>
-      <h2 className="text-black text-2xl font-bold text-center tracking-wider leading-[50px]">Mystery Digits</h2>
-      in collaboration with
-      <button onClick={paly} className="bg-gray-300  w-14 h-14 rounded-full"><i className="fa fa-angle-left rotate-180 text-2xl text-gray-600"/></button>
+      <div className="w-fit text-center h-fit m-auto flex flex-col" style={{animation:"revele 3s"}}>
+      <h2 className="text-black text-3xl my-3 font-bold text-center tracking-wider leading-[50px]">Mystery Digits</h2>
+      <p className="text-xs text-left">in collaboration with</p>
+      <div className="flex items-center justify-between">
+      <img src={iedc} alt="iedc" className="h-5"/>
+      <img src={iic} alt="iic" className="h-7"/>
+      </div>
+      <button onClick={paly} className="bg-gray-300 my-3 mx-auto w-14 h-14 rounded-full"><i className="fa fa-angle-left rotate-180 text-2xl text-gray-600"/></button>
       </div>
     
     </div>
@@ -69,7 +75,7 @@ const mut=()=>{
     <nav className="box-border pt-2 flex justify-between z-10">
       <img src={logo} className="w-8"/>
       <div className="w-5 h-5" onClick={mut}>
-      {mute?<i class="fa-solid fa-volume-xmark text-white"></i>:<i class="fa-solid fa-volume-high text-white"></i>}
+      {mute?<i className="fa-solid fa-volume-xmark text-white"></i>:<i className="fa-solid fa-volume-high text-white"></i>}
       </div>
     </nav>
     <div className="flex flex-col items-center mt-7 z-10">

@@ -26,7 +26,7 @@ function Leader(){
         getrank(sorted)
         })
         
-   },5000) },[])
+   },3000) },[])
 
     return(
         <div className="w-full h-svh box-border p-2">

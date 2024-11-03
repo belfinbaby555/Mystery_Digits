@@ -7,7 +7,6 @@ import Landing from './Landing';
 import axios from 'axios';
 import Login from './Login';
 import Game from './Game';
-import Footer from './Footer';
 import Audio from './component/Audio';
 
 export default function Main(){
@@ -20,7 +19,6 @@ return(
       <Route path='/' element={<Landing/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/game' element={<Game/>}/>
-      <Route path='/josh' element={<Footer/>}/>
     </Routes>
   </HashRouter>
 )
