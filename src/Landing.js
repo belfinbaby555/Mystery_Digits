@@ -1,7 +1,7 @@
 import bg from "./images/BG.png"
 import logo from "./images/Tantra White.png"
 import Leader from "./component/Leader";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import iedc from "./images/iedc.png"
 import iic from "./images/iic.png"
@@ -86,8 +86,8 @@ const mut=()=>{
       Within!</p>
     </div>
     <div className="w-full text-gray-200 z-10 box-border text-base px-5 py-2 my-2 border-2 border-white rounded-lg">
-      <h4 className="my-2">Registration fee:12</h4>
-      <h4 className="my-2">Price pool: 2.5k</h4>
+      <h4 className="my-2">Registration fee: Rs.20</h4>
+      <h4 className="my-2">Price pool: Rs.2.5k</h4>
     </div>
     <div className="z-10">
       <Link to="/login"><button className="w-full h-fit py-2 text-[17px] rounded font-bold border-0 outline-0 mt-5 bg-white text-black ">Play Now</button></Link>

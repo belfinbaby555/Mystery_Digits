@@ -35,6 +35,21 @@ function Login() {
         setIsMuted(!isMuted);
     };
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await axios.get("/dashboard")
+                .then(res=>{
+                    navigate("/game")
+                })
+                
+            } catch (e) {
+                navigate("/login");
+            }
+        };
+        fetchData();
+    }, [navigate]);
+
     const handleLogin = async (event) => {
         event.preventDefault();
         setIsLoading(true);

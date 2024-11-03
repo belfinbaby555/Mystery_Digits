@@ -4,6 +4,7 @@ import Confetti from "react-confetti";
 import over from "../images/game_over.png";
 import text from "../images/text_over.png";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 function GamePlay({ select }) {
@@ -14,6 +15,7 @@ function GamePlay({ select }) {
     const [error, setError] = useState(false);
     const [approved, setApproved] = useState(false);
     const [load, setLoad] = useState(false);
+    const [loading, isloading] = useState(true)
     const navigate = useNavigate();
 
     const toggleMute = () => {
@@ -29,6 +31,7 @@ function GamePlay({ select }) {
                 setUser(res.data);
                 setLeft(res.data.level);
                 setFile(res.data.filepath);
+                isloading(false)
             } catch (e) {
                 navigate("/login");
             }
@@ -85,7 +88,9 @@ function GamePlay({ select }) {
 
     return (
         <div className={`w-full h-svh bg-gray-300 text-center rounded-xl relative overflow-hidden box-border px-2 py-3 ${select ? "block" : "hidden"}`}>
-            {user.continue ? (
+            {loading?
+            <Loading/>:
+            user.tries && user.continue ? (
                 <div className="flex flex-col h-full">
                     {approved && (
                         <div className="absolute top-0 left-0 flex h-full w-full backdrop-blur-sm bg-[#00000025] z-30">
@@ -151,6 +156,7 @@ function GamePlay({ select }) {
                     <p className="mt-5 text-gray-600">Thanks for passing by...</p>
                 </div>
             )}
+           
         </div>
     );
 }
