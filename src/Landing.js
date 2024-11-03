@@ -3,7 +3,6 @@ import logo from "./images/Tantra White.png"
 import Leader from "./component/Leader";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import song from "./assets/song.mp3"
 
 
 function Landing() {
@@ -11,16 +10,25 @@ function Landing() {
 
   
 const [raindrops, setRaindrops] = useState([]);
+const [fade,setfade]=useState(false)
+const [mute,setmute]=useState(false)
 
 const paly=()=>{
-  document.getElementById("aud").play()
+  document.getElementById("aud").play();
+  setfade(true)
+}
+
+const mut=()=>{
+  mute?document.getElementById("aud").play():
+  document.getElementById("aud").pause();
+  setmute(!mute)
 }
 
       
     useEffect(() => {
       const intervalId = setInterval(() => {
         const left = Math.random() * 90 + 5; 
-        const time = Math.random() * 4 + 1; 
+        const time = Math.random() * 4 + 3; 
         const rotation = Math.random() * 180 - 30;
         
         const newRaindrop = (
@@ -39,7 +47,7 @@ const paly=()=>{
         );
         
         setRaindrops((prevRaindrops) => [...prevRaindrops, newRaindrop]);
-      }, 250);
+      }, 400);
   
       return () => clearInterval(intervalId);
     }, []);
@@ -47,15 +55,22 @@ const paly=()=>{
 
   return (
     <div className="w-screen overflow-hidden relative h-svh bg-cover bg-no-repeat box-border px-5 py-2 flex flex-col" style={{backgroundImage:`url(${bg})`}}>
+    <div className={"absolute w-screen h-svh top-0 flex left-0 duration-[2s] bg-gray-200" + (fade? " opacity-0 z-0":" opacity-100 z-20")}>
+      <div className="w-fit text-center h-fit m-auto" style={{animation:"revele 3s"}}>
+      <h2 className="text-black text-2xl font-bold text-center tracking-wider leading-[50px]">Mystery Digits</h2>
+      in collaboration with
+      <button onClick={paly} className="bg-gray-300  w-14 h-14 rounded-full"><i className="fa fa-angle-left rotate-180 text-2xl text-gray-600"/></button>
+      </div>
     
+    </div>
     {raindrops}
-
-    <video id="aud" className="hidden" controls src={song}>
-    </video>
-    <button onClick={paly} className="bg-white">fgdf</button>
+    
     
     <nav className="box-border pt-2 flex justify-between z-10">
       <img src={logo} className="w-8"/>
+      <div className="w-5 h-5" onClick={mut}>
+      {mute?<i class="fa-solid fa-volume-xmark text-white"></i>:<i class="fa-solid fa-volume-high text-white"></i>}
+      </div>
     </nav>
     <div className="flex flex-col items-center mt-7 z-10">
       <h1 className="text-black font-extrabold text-xl tracking-wide text-center my-3" style={{textShadow:'0 0 3px white,0 0 3px white'}}>Welcome back to</h1>

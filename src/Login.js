@@ -11,7 +11,7 @@ function Login(){
     const [load,setload]=useState(false)
     const [error,seterror]=useState('')
     const navigate=useNavigate();
-
+    const [mute,setmute]=useState(false)
     
 
     useEffect(()=>{
@@ -23,7 +23,11 @@ function Login(){
                 setcsrf(res.data.message)
             })
     },[])
-
+    const mut=()=>{
+        mute?document.getElementById("aud").play():
+        document.getElementById("aud").pause();
+        setmute(!mute)
+      }
     function login(event){
         setload(true)
         seterror("")
@@ -49,8 +53,12 @@ function Login(){
 
     return(
         <div className="w-screen h-svh flex overflow-hidden flex-col bg-cover relative bg-no-repeat box-border px-5 py-3" style={{backgroundImage:`url(${bg})`}}>
+
             <nav className="box-border pt-2 flex justify-between">
                 <img src={logo} className="w-8"/>
+                <div className="w-5 h-5" onClick={mut}>
+      {mute?<i class="fa-solid fa-volume-xmark text-white"></i>:<i class="fa-solid fa-volume-high text-white"></i>}
+      </div>
             </nav>
             <p className="text-3xl w-full text-center mix-blend-difference my-12 text-white">Mystery <br/> Digits</p>
             <h4 className="text-3xl py-10 font-bold text-gray-700 text-center">Login</h4>

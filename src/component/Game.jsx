@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-import test from "../images/test.jpg"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function GamePlay({select}){
 
-    const [c,gc]=useState({})
-    const [left,setleft]=useState(5)
+    const [left,setleft]=useState()
+    const [user,getuser]=useState({})
 
-
-    const mag=(event)=>{
-        let a=event.clientX;
-        let b=event.clientY;
-        
-        let w=event.target.width;
-        let h=event.target.height;
-
-
-        // console.log({x:a-60,y:b-230,w:w+77,h:h+77})
-
-        gc({x:a-30,y:b-237,w:w,h:h})
-    }
+    useEffect(()=>{
+        axios.get("/dashboard")
+        .then(res=>{
+            getuser(res.data)
+            setleft(res.data.lvl)
+        })
+    },[])
     const remain=(e)=>{
-        setleft(5)
+        setleft(user.lvl)
 
-        const val = 5
+        const val = user.lvl
 
         
         if(val-(e.target.value.length) <= 0){
@@ -36,9 +30,25 @@ function GamePlay({select}){
     const game=(event)=>{
         event.preventDefault()
 
-        const val=event.target.elements[0].value
+        const val=event.target.elements[0].value;
 
-        console.log(val)
+        axios.get("/get_csrf_token")
+        .then(res=>{
+            console.log(res.data)
+            axios.post("/game",{val:val},{
+                headers:{
+                    "Content-Type":"application/json",
+                    "X-CSRFToken":res.data.message
+                }
+            }).then(res=>{
+                console.log(res.data)
+            })
+            .catch(e=>{
+                console.log(e)
+            })
+        })
+
+        
     }
     return(
         <div className={"w-full h-svh bg-gray-300 text-center rounded-xl overflow-hidden box-border px-2" + (select?" block":" hidden")}>
@@ -46,18 +56,16 @@ function GamePlay({select}){
                 <div className="w-full flex justify-between ">
                     <span className="flex items-center text-gray-600 text-sm">
                         <i className="fa-solid fa-arrow-up-right-dots mr-2"/>
-                        <p >Level:<b className="text-black text-base">99</b></p>
+                        <p >Level:<b className="text-black text-base">{user.lvl}</b></p>
                     </span>
                     <span className="flex items-center text-sm text-gray-600">
                         <i className="fa-solid fa-users-line mr-2"/>
                         <p>Players:<b className="text-black text-base">300+</b></p>
                     </span>
                 </div>
-                <h4 className="text-gray-600 text-center my-2">No. of tries left:<b className="text-black">5</b></h4>
-                <div onMouseMoveCapture={mag} className="relative w-fit h-fit overflow-y-hidden">
-                <img src={test} className="w-full h-fit rounded-lg"/>
-                <div className="w-20 h-20 border-2 rounded-full absolute bg-no-repeat border-white"
-                style={{top:`${c.y}px`,left:`${c.x}px`,backgroundImage:`url(${test})`,backgroundSize:`${c.w*3}px ${c.h*3}px`,backgroundPosition:`-${(c.x*3)}px -${(c.y*3)}px`}}></div>
+                <h4 className="text-gray-600 text-center my-2">No. of tries left:<b className="text-black">{user.tries}</b></h4>
+                <div className="relative w-fit h-fit overflow-y-hidden">
+                <img src={user.filename} className="w-full h-fit rounded-lg"/>
                 </div>
                 <p className="text-xs pb-1 text-gray-600 text-left">**tap on img to magnify</p>
                 <div className="w-full px-3 py-1 bg-black text-white text-center rounded">Digit Left: {left}</div>
