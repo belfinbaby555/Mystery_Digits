@@ -59,11 +59,12 @@ const mut=()=>{
     <div className="w-screen overflow-hidden relative h-svh bg-cover bg-no-repeat box-border px-5 py-2 flex flex-col" style={{backgroundImage:`url(${bg})`}}>
     <div className={"absolute w-screen h-svh top-0 flex left-0 duration-[2s] bg-gray-200" + (fade? " opacity-0 z-0":" opacity-100 z-20")}>
       <div className="w-fit text-center h-fit m-auto flex flex-col" style={{animation:"revele 3s"}}>
+       <div className=" bg-black w-20 h-20 flex rounded-full mx-auto"> <img src={logo} className="w-10 m-auto"/></div>
       <h2 className="text-black text-3xl my-3 font-bold text-center tracking-wider leading-[50px]">Mystery Digits</h2>
-      <p className="text-xs text-left">in collaboration with</p>
-      <div className="flex items-center justify-between">
-      <img src={iedc} alt="iedc" className="h-5"/>
-      <img src={iic} alt="iic" className="h-7"/>
+      <p className="text-xs">in collaboration with</p>
+      <div className="flex items-center my-3 justify-between">
+      <img src={iedc} alt="iedc" className="h-8"/>
+      <img src={iic} alt="iic" className="h-8"/>
       </div>
       <button onClick={paly} className="bg-gray-300 my-3 mx-auto w-14 h-14 rounded-full"><i className="fa fa-angle-left rotate-180 text-2xl text-gray-600"/></button>
       </div>
