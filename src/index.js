@@ -8,9 +8,12 @@ import axios from 'axios';
 import Login from './Login';
 import Game from './Game';
 import Audio from './component/Audio';
+import DisableDevtool from 'disable-devtool';
 
 export default function Main(){
   axios.defaults.withCredentials=true;
+
+  DisableDevtool();
 return(
   <HashRouter>
     <Audio/>
