@@ -12,7 +12,7 @@ function GamePlay({ select }) {
     const [user, setUser] = useState({});
     const [mute, setMute] = useState(false);
     const [file, setFile] = useState();
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({status:false,msg:""});
     const [approved, setApproved] = useState(false);
     const [load, setLoad] = useState(false);
     const [loading, isloading] = useState(true)
@@ -55,9 +55,18 @@ function GamePlay({ select }) {
 
     const handleGameSubmit = async (event) => {
         event.preventDefault();
+
+        
         setLoad(true);
         
         const val = event.target.elements[0].value;
+
+        if(val.length !== Number(user.level)){
+            setError({status:true,msg:`No. of digits should be ${user.level}`})
+            setLoad(false)
+            setTimeout(() => setError({status:false,msg:""}), 2000);
+        }
+        else{
 
         try {
             const tokenResponse = await axios.get("/get_csrf_token");
@@ -79,11 +88,11 @@ function GamePlay({ select }) {
                 continue: e.response.data.continue,
             }));
             setLeft(e.response.data.level);
-            setError(true);
-            setTimeout(() => setError(false), 2000);
+            setError({status:true,msg:`Wrong digits ${e.response.data.tries} chances left`});
+            setTimeout(() => setError({status:false,msg:""}), 2000);
         } finally {
             setLoad(false);
-        }
+        }}
     };
 
     return (
@@ -137,13 +146,11 @@ function GamePlay({ select }) {
                         <input
                             required
                             type="number"
-                            min={10 ** (user.level - 1)}
-                            max={(10 ** user.level) - 1}
                             onChange={handleInputChange}
                             placeholder="Enter the numbers found"
                             className="w-full border-2 border-black px-3 py-2 mt-6 rounded"
                         />
-                        {error && <p className="text-sm text-red-600">Wrong Digits. {user.tries} chances left.</p>}
+                        {error.status && <p className="text-sm text-red-600">{error.msg}</p>}
                         <button className="w-full mt-3 py-2 bg-black text-white rounded text-lg" style={error ? { animation: "shake 0.4s" } : {}} type="submit">
                             {load ? <div className="w-5 mx-auto rounded-full h-5 border-4 animate-spin border-gray-500 border-t-white"></div> : "Submit"}
                         </button>

@@ -84,8 +84,8 @@ function Login() {
     return (
         <div
             className="w-screen h-svh flex flex-col overflow-hidden bg-cover relative bg-no-repeat box-border px-5 py-3"
-            style={{ backgroundImage: `url(${bg})` }}
-        >
+            style={{ backgroundImage: `url(${bg})` }}>
+                <div className="md:hidden flex flex-col h-full">
             <nav className="flex justify-between pt-2">
                 <img src={logo} className="w-8" alt="Logo" />
                 <div className="w-5 h-5 text-white" onClick={toggleMute}>
@@ -120,6 +120,8 @@ function Login() {
             <div className={`absolute top-0 duration-500 ${showTerms ? "left-full" : "left-0"}`}>
                 <Term move={showTerms} setmove={setShowTerms} />
             </div>
+            </div>
+            <img src="https://mysterydigits.vjec.in/desktop.jpg" className="h-svh"/>
         </div>
     );
 }

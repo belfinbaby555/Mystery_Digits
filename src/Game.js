@@ -7,7 +7,8 @@ function Game() {
     const [isGameSelected, setIsGameSelected] = useState(true);
 
     return (
-        <div className="w-screen h-svh box-border px-3 py-3 flex flex-col">
+        <div className="w-screen h-svh box-border flex px-3 py-3 flex-col">
+            <div className="md:hidden flex flex-col h-full">
             <nav className="flex justify-between">
                 <img src={logo} className="w-8 invert" alt="Tantra Logo" />
                 <p className="text-lg font-semibold">Mystery Digits</p>
@@ -39,6 +40,8 @@ function Game() {
                     <Leader />
                 </div>
             )}
+            </div>
+            <img src="https://mysterydigits.vjec.in/desktop.jpg" className="h-svh"/>
         </div>
     );
 }
