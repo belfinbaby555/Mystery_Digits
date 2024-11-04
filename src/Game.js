@@ -8,7 +8,7 @@ function Game() {
 
     return (
         <div className="w-screen h-svh box-border flex px-3 py-3 flex-col">
-            <div className="min-[380px]:hidden flex flex-col h-full">
+            <div className="sm:hidden flex flex-col h-full">
             <nav className="flex justify-between">
                 <img src={logo} className="w-8 invert" alt="Tantra Logo" />
                 <p className="text-lg font-semibold">Mystery Digits</p>
@@ -41,7 +41,7 @@ function Game() {
                 </div>
             )}
             </div>
-            <img src="https://mysterydigits.vjec.in/desktop.jpg" className="h-svh min-[380px]:block hidden"/>
+            <img src="https://mysterydigits.vjec.in/desktop.jpg" className="h-svh sm:block hidden"/>
         </div>
     );
 }

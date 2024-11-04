@@ -85,7 +85,7 @@ function Login() {
         <div
             className="w-screen h-svh flex flex-col overflow-hidden bg-cover relative bg-no-repeat box-border px-5 py-3"
             style={{ backgroundImage: `url(${bg})` }}>
-                <div className="min-[380px]:hidden flex flex-col h-full">
+                <div className="sm:hidden flex flex-col h-full">
             <nav className="flex justify-between pt-2">
                 <img src={logo} className="w-8" alt="Logo" />
                 <div className="w-5 h-5 text-white" onClick={toggleMute}>
@@ -121,7 +121,7 @@ function Login() {
                 <Term move={showTerms} setmove={setShowTerms} />
             </div>
             </div>
-            <img src="https://mysterydigits.vjec.in/desktop.jpg" className="h-svh min-[380px]:block hidden"/>
+            <img src="https://mysterydigits.vjec.in/desktop.jpg" className="h-svh sm:block hidden"/>
         </div>
     );
 }
